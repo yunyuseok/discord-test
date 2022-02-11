@@ -1,0 +1,14 @@
+node_modules/
+data/
+config/
+migrations/
+models/
+seeders/
+
+.env
+.eslintignore
+.eslintrc.json
+.prettierrc.js
+
+tsconfig.json
+tslint.json
