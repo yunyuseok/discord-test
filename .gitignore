@@ -5,6 +5,7 @@ migrations/
 models/
 seeders/
 .vscode/
+endTest/
 
 .env
 .eslintignore
