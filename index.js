@@ -1,4 +1,4 @@
-const { Client, Intents, MessageEmbed } = require("discord.js");
+const { Client, Intents } = require("discord.js");
 require("dotenv").config();
 
 const intents = new Intents();
@@ -18,24 +18,6 @@ client.on("message", (msg) => {
     msg.reply("호");
   }
 
-  if(msg.content === "프로필") {
-    const embed = new MessageEmbed()
-      .setColor('#FF0000')
-      .setTitle("sayarn-TestBot")
-      .setAuthor({
-        name: "Author-sayarn",
-        iconURL:
-          "https://i3.ruliweb.com/img/20/10/29/17573847c944f8bd6.jpg",
-      })
-      .addFields(
-        { name: "기능", value: "프로필(embed) 보여주기", inline: true },
-        { name: "좋아하는것", value: "포켓몬", inline: true },
-      )
-      .setImage("https://www.dogdrip.net/dvs/d/20/10/02/dcba2c96d7b670f8858270a20211270e.png")
-      .setTimestamp(Date.now())
-      .setFooter({text: `Author : sayarn \nUsage : 프로필(Embed) 보여주기`});
-    msg.channel.send({embeds: [embed]});
-  }
 });
 
 client.login(process.env.token);
