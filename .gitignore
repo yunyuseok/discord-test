@@ -4,6 +4,7 @@ config/
 migrations/
 models/
 seeders/
+.vscode/
 
 .env
 .eslintignore
