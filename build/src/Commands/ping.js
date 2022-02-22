@@ -5,7 +5,7 @@ const command = {
     data: new builders_1.SlashCommandBuilder()
         .setName('핑')
         .setDescription('퐁을 돌려줍니다!'),
-    execute: async (interaction) => {
+    execute: async (interaction, ...args) => {
         interaction.reply("퐁");
     },
 };

@@ -1,5 +1,4 @@
 import { ExtentsClient } from "./Client";
-import { ICommand, IEvent } from "./Interfaces";
 import { Intents } from 'discord.js';
 import { token } from "../config.json";
 import MyLib from "./lib";
@@ -14,5 +13,7 @@ const client : ExtentsClient = new ExtentsClient({ intents });
 client.initEvent(MyLib.getDirFileList("./build/src/Events"));
 // 클라이언트에 명령어의 처리 세팅
 client.initCommand(MyLib.getDirFileList("./build/src/Commands"));
+// 클라이언트에 버튼 처리 세팅
+client.initButton(MyLib.getDirFileList("./build/src/Buttons"));
 
 client.login(token);

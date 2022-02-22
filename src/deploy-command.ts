@@ -11,25 +11,27 @@ import { Routes } from 'discord-api-types/v9';
 import * as config from "../config.json";
 import MyLib from './lib';
 
-const {	clientId, guildId, token } = config;
+const { clientId, guildIds, token } = config;
 
 const commands: SlashCommandBuilder[] = [];
 const commandsFile = MyLib.getDirFileList("./build/src/Commands");
 
-for(const file of commandsFile) {
+for (const file of commandsFile) {
 	const command = require(`./Commands/${file}`).data;
 	commands.push(command);
 }
 
 const rest: REST = new REST({ version: '9' }).setToken(token);
 
-(async() => {
-	try {
-		await rest.put(Routes.applicationGuildCommands(clientId, guildId), 
-		{ body: commands });
-	} catch(err) {
-		console.error("error : ", err);
-	};
+(async () => {
+	guildIds.map(async (guildId: string) => {
+		try {
+			await rest.put(Routes.applicationGuildCommands(clientId, guildId),
+				{ body: commands });
+		} catch (err) {
+			console.error("error : ", err);
+		};
+	});
 }
 )();
 

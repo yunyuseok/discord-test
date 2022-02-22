@@ -10,7 +10,7 @@ const rest_1 = require("@discordjs/rest");
 const v9_1 = require("discord-api-types/v9");
 const config = require("../config.json");
 const lib_1 = require("./lib");
-const { clientId, guildId, token } = config;
+const { clientId, guildIds, token } = config;
 const commands = [];
 const commandsFile = lib_1.default.getDirFileList("./build/src/Commands");
 for (const file of commandsFile) {
@@ -19,12 +19,14 @@ for (const file of commandsFile) {
 }
 const rest = new rest_1.REST({ version: '9' }).setToken(token);
 (async () => {
-    try {
-        await rest.put(v9_1.Routes.applicationGuildCommands(clientId, guildId), { body: commands });
-    }
-    catch (err) {
-        console.error("error : ", err);
-    }
-    ;
+    guildIds.map(async (guildId) => {
+        try {
+            await rest.put(v9_1.Routes.applicationGuildCommands(clientId, guildId), { body: commands });
+        }
+        catch (err) {
+            console.error("error : ", err);
+        }
+        ;
+    });
 })();
 //# sourceMappingURL=deploy-command.js.map

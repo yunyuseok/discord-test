@@ -1,7 +1,8 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
+import { SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder } from '@discordjs/builders';
+declare type slahOption = SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
 declare type execute = (...args: any[]) => void;
 export interface ICommand {
-    readonly data: SlashCommandBuilder;
+    readonly data: slahOption;
     readonly execute: execute;
 }
 export {};

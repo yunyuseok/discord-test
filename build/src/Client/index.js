@@ -6,19 +6,28 @@ class ExtentsClient extends discord_js_1.Client {
     constructor(option) {
         super(option);
         this.commands = new discord_js_1.Collection();
+        this.buttons = new discord_js_1.Collection();
     }
     initEvent(eventFiles = [""]) {
         for (const file of eventFiles) {
             const event = require(`../Events/${file}`);
-            event.once ?
-                this.once(event.name, (...args) => event.execute(...args)) :
-                this.on(event.name, (...args) => event.execute(this, ...args));
+            if (event.name !== "interactionButton") {
+                event.once ?
+                    this.once(event.name, (...args) => event.execute(...args)) :
+                    this.on(event.name, (...args) => event.execute(this, ...args));
+            }
         }
     }
     initCommand(commandFiles = [""]) {
         for (const file of commandFiles) {
             const command = require(`../Commands/${file}`);
             this.commands.set(command.data.name, command);
+        }
+    }
+    initButton(buttonFiles = [""]) {
+        for (const file of buttonFiles) {
+            const button = require(`../Buttons/${file}`);
+            this.buttons.set(button.name, button);
         }
     }
 }

@@ -12,5 +12,7 @@ const client = new Client_1.ExtentsClient({ intents });
 client.initEvent(lib_1.default.getDirFileList("./build/src/Events"));
 // 클라이언트에 명령어의 처리 세팅
 client.initCommand(lib_1.default.getDirFileList("./build/src/Commands"));
+// 클라이언트에 버튼 처리 세팅
+client.initButton(lib_1.default.getDirFileList("./build/src/Buttons"));
 client.login(config_json_1.token);
 //# sourceMappingURL=index.js.map
