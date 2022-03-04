@@ -1,36 +1,24 @@
-import { IEvent, ICommand, IButton } from "../Interfaces";
-import { CommandInteraction, ButtonInteraction } from "discord.js";
+import { IEvent, ICommand, } from "../Interfaces";
+import { CommandInteraction } from "discord.js";
 import { ExtentsClient } from "../Client";
 
-type Itn = CommandInteraction | ButtonInteraction;
+type Itn = CommandInteraction;
 
 const event: IEvent = {
     name: "interactionCreate",
     once: false,
-    execute: async (client: ExtentsClient, cmdItn: Itn) => {
-        const btnItn : Itn = cmdItn;
-        if (!cmdItn.isCommand() && !btnItn.isButton()) return;
+    execute: async (client: ExtentsClient, itn: Itn) => {
+        if (!itn.isCommand()) return;
 
-        if(cmdItn.isCommand()) {
-            const command : ICommand | undefined = client.commands.get(cmdItn.commandName);
+        if(itn.isCommand()) {
+            const command : ICommand | undefined = client.commands.get(itn.commandName);
             if (!command) return;
     
             try {
-                await command.execute(cmdItn);
+                await command.execute(itn);
             } catch (error) {
                 console.error(error);
-                await cmdItn.reply({ content: '명령어 실패', ephemeral: true });
-            }
-        } else if(btnItn.isButton()) {
-            const button : IButton | undefined = client.buttons.get(btnItn.customId);
-
-            if (!button) return;
-    
-            try {
-                await button.execute(btnItn);
-            } catch (error) {
-                console.error(error);
-                await btnItn.reply({ content: '명령어 실패', ephemeral: true });
+                await itn.reply({ content: '명령어 실패', ephemeral: true });
             }
         }
     } 

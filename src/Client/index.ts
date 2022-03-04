@@ -1,13 +1,12 @@
 import { Client, ClientOptions, Collection } from "discord.js";
-import { IEvent, ICommand, IButton } from "../Interfaces";
+import { IEvent, ICommand } from "../Interfaces";
 
 export class ExtentsClient extends Client {
     readonly commands : Collection<string, ICommand>;
-    readonly buttons : Collection<string, IButton>;
+
     constructor(option : ClientOptions) {
         super(option);
         this.commands = new Collection();
-        this.buttons = new Collection();
     }
 
     public initEvent(eventFiles: string[] = [""]) {
@@ -26,13 +25,6 @@ export class ExtentsClient extends Client {
         for(const file of commandFiles) {
             const command: ICommand = require(`../Commands/${file}`);
             this.commands.set(command.data.name, command);
-        }
-    }
-
-    public initButton(buttonFiles: string[] = [""]) {
-        for(const file of buttonFiles) {
-            const button: IButton = require(`../Buttons/${file}`);
-            this.buttons.set(button.name, button);
         }
     }
 }

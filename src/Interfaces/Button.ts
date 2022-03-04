@@ -1,7 +1,10 @@
-type buttonOption = string;
-type execute = (...args:any[]) => void;
+import { ButtonInteraction, MessageButtonStyleResolvable, User } from "discord.js";
 
 export interface IButton {
-    readonly name: buttonOption,
-    readonly execute : execute
+    customId: string,
+    label: string,
+    emoji?: string,
+    disable?: boolean
+    style: MessageButtonStyleResolvable,
+    action: (i: ButtonInteraction, user?: User) => void;
 }

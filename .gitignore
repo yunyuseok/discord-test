@@ -5,12 +5,12 @@ migrations/
 models/
 seeders/
 .vscode/
-endTest/
 
 .env
 .eslintignore
 .eslintrc.json
 .prettierrc.js
+config.json
 
 tsconfig.json
 tslint.json
